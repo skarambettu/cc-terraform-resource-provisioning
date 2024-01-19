@@ -1,0 +1,9 @@
+{
+    "apikeys": {
+       "kafka": [
+          {
+            "principal": "test-sandesh2"
+          }
+       ]
+    }
+}
