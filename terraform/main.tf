@@ -28,3 +28,14 @@ module "sa" {
   sa       = each.value
 }
 
+locals {
+  apikeys_with_principals = [ for apikey in local.apikeys.apikeys.kafka : apikey if apikey.principal != "" ]
+}
+
+module "apikey_kafka" {
+  for_each = { for apikey in local.apikeys_with_principals : apikey.principal => apikey }
+  source   = "./modules/apikey"
+  env_id   = var.confluent_environment
+  kafka_id = var.confluent_kafka_cluster
+  apikey   = each.value
+}
