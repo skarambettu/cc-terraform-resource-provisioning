@@ -16,6 +16,7 @@ locals {
   sas    = jsondecode(file("./sas.json"))
   acls   = jsondecode(file("./acls.json"))
   apikeys    = jsondecode(file("./apikeys.json"))
+  topics = jsondecode(file("./topics.json"))
 }
 
 locals {
