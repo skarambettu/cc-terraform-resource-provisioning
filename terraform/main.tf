@@ -58,6 +58,6 @@ module "acl" {
   permission      = each.value.permission
   admin_sa = {
     api_key    = var.kafka_api_key
-    api_secret = var.kafka_api_key
+    api_secret = var.kafka_api_secret
   }
 }
