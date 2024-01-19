@@ -61,3 +61,19 @@ module "acl" {
     api_secret = var.kafka_api_secret
   }
 }
+
+locals {
+  topics_with_names = [ for topic in local.topics.topics : topic if topic.name != "" ]
+}
+
+module "topic" {
+  for_each = { for topic in local.topics_with_names : topic.name => topic }
+  source   = "./modules/topic"
+  env_id   = var.confluent_environment
+  kafka_id = var.confluent_kafka_cluster
+  topic    = each.value
+  admin_sa = {
+    api_key    = var.kafka_api_key
+    api_secret = var.kafka_api_secret
+  }
+}
