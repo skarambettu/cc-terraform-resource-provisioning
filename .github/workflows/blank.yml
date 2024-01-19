@@ -1,0 +1,40 @@
+# This is a basic workflow to help you get started with Actions
+
+name: CI/CD with Terraform
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  deploy-infra:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: setup Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_wrapper: false
+      - name: Terraform init
+        id: init
+        run: terraform init -backend-config=access_key=${{ secrets.BACKEND_STORAGE_ACCOUNT_ACCESS_KEY }}
+        working-directory: ./terraform
+
+      - name: Setup Terraform variables
+        working-directory: ./terraform
+        id: vars
+        run: |-
+          cat > qut.terraform.tfvars <<EOF
+          confluent_cloud_api_key = "${{ secrets.CONFLUENT_CLOUD_API_KEY }}"
+          confluent_cloud_api_secret = "${{ secrets.CONFLUENT_CLOUD_API_SECRET }}"
+          EOF
+          cat qut.terraform.tfvars
+      - name: Terraform Plan
+        id: plan
+        run: |
+          terraform plan -var-file=qut.terraform.tfvars -out=PLAN
+        working-directory: ./terraform
+      - name: Terraform Apply
+        id: apply
+        run: terraform apply PLAN
+        working-directory: ./terraform
