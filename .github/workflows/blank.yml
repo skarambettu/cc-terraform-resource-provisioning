@@ -27,6 +27,8 @@ jobs:
           cat > qut.terraform.tfvars <<EOF
           confluent_cloud_api_key = "${{ secrets.CONFLUENT_CLOUD_API_KEY }}"
           confluent_cloud_api_secret = "${{ secrets.CONFLUENT_CLOUD_API_SECRET }}"
+          kafka_api_key = "${{ secrets.KAFKA_API_KEY }}"
+          kafka_api_secret = "${{ secrets.KAFKA_API_SECRET }}"
           EOF
           cat qut.terraform.tfvars
       - name: Terraform Plan

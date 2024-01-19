@@ -4,7 +4,7 @@
           "resource_type": "TOPIC",
           "resource_name": "stephane",
           "pattern_type": "LITERAL",
-          "principal": "test-sandesh2",
+          "principal": "test-sandesh5",
           "host": "*",
           "operation": "WRITE",
           "permission": "ALLOW"

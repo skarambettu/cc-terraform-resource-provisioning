@@ -27,3 +27,13 @@ variable "confluent_kafka_cluster" {
   description = "Confluent cloud kafka cluster"
   type        = string
 }
+
+variable "kafka_api_key" {
+  description = "Kafka API Key"
+  type        = string
+}
+
+variable "kafka_api_secret" {
+  description = "Kafka API Secret"
+  type        = string
+}

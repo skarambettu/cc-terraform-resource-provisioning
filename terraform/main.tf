@@ -39,3 +39,25 @@ module "apikey_kafka" {
   kafka_id = var.confluent_kafka_cluster
   apikey   = each.value
 }
+
+locals {
+  acls_with_principals = [ for acl in local.acls.acls : acl if acl.principal != "" ]
+}
+
+module "acl" {
+  for_each        = { for acl in local.acls_with_principals : format("%s/%s/%s/%s/%s/%s/%s", acl.principal, acl.resource_type, acl.resource_name, acl.operation, acl.host, acl.pattern_type, acl.permission) => acl }
+  source          = "./modules/acl"
+  env_id          = var.confluent_environment
+  kafka_id        = var.confluent_kafka_cluster
+  principal       = each.value.principal
+  resource_type   = each.value.resource_type
+  resource_name   = each.value.resource_name
+  operation       = each.value.operation
+  host            = each.value.host
+  pattern_type    = each.value.pattern_type
+  permission      = each.value.permission
+  admin_sa = {
+    api_key    = var.kafka_api_key
+    api_secret = var.kafka_api_key
+  }
+}
