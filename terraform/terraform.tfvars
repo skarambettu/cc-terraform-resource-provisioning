@@ -1,7 +1,4 @@
 project="projectA"
 project_env="dev"
-reasource_group_name="sandesh-group1"
-storage_account_name="sandeshblobstore"
-container_name="sandesh-test"
 confluent_environment="env-xrz8qx"
 confluent_kafka_cluster="lkc-okqdox"
