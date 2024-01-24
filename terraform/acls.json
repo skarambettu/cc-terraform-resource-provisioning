@@ -116,6 +116,33 @@
             "host": "*",
             "operation": "READ",
             "permission": "ALLOW"
+          },
+          {
+            "resource_type": "TOPIC",
+            "resource_name": "sandesh56",
+            "pattern_type": "LITERAL",
+            "principal": "test-sandesh9",
+            "host": "*",
+            "operation": "CREATE",
+            "permission": "ALLOW"
+          },
+          {
+            "resource_type": "TOPIC",
+            "resource_name": "sandesh56",
+            "pattern_type": "LITERAL",
+            "principal": "test-sandesh9",
+            "host": "*",
+            "operation": "WRITE",
+            "permission": "ALLOW"
+          },
+          {
+            "resource_type": "TOPIC",
+            "resource_name": "sandesh56",
+            "pattern_type": "LITERAL",
+            "principal": "test-sandesh9",
+            "host": "*",
+            "operation": "DESCRIBECONFIGS",
+            "permission": "ALLOW"
           }
     ]
 }
