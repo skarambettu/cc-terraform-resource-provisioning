@@ -5,10 +5,10 @@ terraform {
 data "terraform_remote_state" "state" {
   backend = "azurerm"
   config {
-    resource_group_name = "sandesh-group1"
-    storage_account_name = "sandeshblobstore"
-    container_name       = "sandesh-test"
-    key = "tfstate/${var.project}/${var.project_env}/abcd.dev3.tfstate"
+    resource_group_name = "${var.resource_group_name}"
+    storage_account_name = "${var.storage_account_name}"
+    container_name       = "${var.container_name}"
+    key = "${var.project}/${var.project_env}"
   }
 }
 
