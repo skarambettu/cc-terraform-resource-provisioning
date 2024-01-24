@@ -141,7 +141,7 @@
             "pattern_type": "LITERAL",
             "principal": "test-sandesh9",
             "host": "*",
-            "operation": "DESCRIBECONFIGS",
+            "operation": "DESCRIBE_CONFIGS",
             "permission": "ALLOW"
           }
     ]
