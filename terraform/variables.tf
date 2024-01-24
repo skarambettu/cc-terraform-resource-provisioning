@@ -37,18 +37,3 @@ variable "kafka_api_secret" {
   description = "Kafka API Secret"
   type        = string
 }
-
-variable "resource_group_name" {
-  description = "Resource Group"
-  type        = string
-}
-
-variable "storage_account_name" {
-  description = "Storage Account"
-  type        = string
-}
-
-variable "container_name" {
-  description = "Container Account"
-  type        = string
-}
