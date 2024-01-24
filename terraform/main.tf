@@ -1,5 +1,10 @@
 terraform {
-  backend "azurerm" {
+  backend "azurerm" {}
+}
+
+data "terraform_remote_state" "state" {
+  backend = "azurerm"
+  config {
     resource_group_name = "sandesh-group1"
     storage_account_name = "sandeshblobstore"
     container_name       = "sandesh-test"
