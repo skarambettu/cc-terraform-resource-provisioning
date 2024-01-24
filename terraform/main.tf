@@ -3,7 +3,7 @@ terraform {
     resource_group_name = "sandesh-group1"
     storage_account_name = "sandeshblobstore"
     container_name       = "sandesh-test"
-    key = "tfstate/projectA/dev/abcd.dev2.tfstate"
+    key = "tfstate/${var.project}/${var.project_env}/abcd.dev3.tfstate"
   }
 }
 
