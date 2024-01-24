@@ -17,7 +17,7 @@ jobs:
           terraform_wrapper: false
       - name: Terraform init
         id: init
-        run: terraform init -backend-config=access_key=${{ secrets.BACKEND_STORAGE_ACCOUNT_ACCESS_KEY }}
+        run: terraform init -backend-config=access_key=${{ secrets.BACKEND_STORAGE_ACCOUNT_ACCESS_KEY }} -backend-config=backend.conf
         working-directory: ./terraform
 
       - name: Setup Terraform variables
