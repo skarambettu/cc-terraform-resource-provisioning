@@ -143,6 +143,24 @@
             "host": "*",
             "operation": "DESCRIBE_CONFIGS",
             "permission": "ALLOW"
+          },
+          {
+            "resource_type": "TOPIC",
+            "resource_name": "sandesh56",
+            "pattern_type": "LITERAL",
+            "principal": "test-sandesh10",
+            "host": "*",
+            "operation": "READ",
+            "permission": "ALLOW"
+          },
+          {
+            "resource_type": "GROUP",
+            "resource_name": "*",
+            "pattern_type": "LITERAL",
+            "principal": "test-sandesh10",
+            "host": "*",
+            "operation": "READ",
+            "permission": "ALLOW"
           }
     ]
 }
