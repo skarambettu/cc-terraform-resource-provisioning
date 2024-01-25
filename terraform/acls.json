@@ -80,6 +80,33 @@
         "host": "*",
         "operation": "DESCRIBE_CONFIGS",
         "permission": "ALLOW"
+      },
+      {
+        "resource_type": "TOPIC",
+        "resource_name": "sandesh53",
+        "pattern_type": "LITERAL",
+        "principal": "test-sandesh22",
+        "host": "*",
+        "operation": "CREATE",
+        "permission": "ALLOW"
+      },
+      {
+        "resource_type": "TOPIC",
+        "resource_name": "sandesh53",
+        "pattern_type": "LITERAL",
+        "principal": "test-sandesh22",
+        "host": "*",
+        "operation": "WRITE",
+        "permission": "ALLOW"
+      },
+      {
+        "resource_type": "TOPIC",
+        "resource_name": "sandesh53",
+        "pattern_type": "LITERAL",
+        "principal": "test-sandesh22",
+        "host": "*",
+        "operation": "DESCRIBE_CONFIGS",
+        "permission": "ALLOW"
       }
     ]
 }
