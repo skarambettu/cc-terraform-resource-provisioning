@@ -161,6 +161,15 @@
             "host": "*",
             "operation": "READ",
             "permission": "ALLOW"
+          },
+          {
+            "resource_type": "TOPIC",
+            "resource_name": "sandesh56",
+            "pattern_type": "LITERAL",
+            "principal": "test-sandesh9",
+            "host": "172.56.80.212",
+            "operation": "WRITE",
+            "permission": "DENY"
           }
     ]
 }
