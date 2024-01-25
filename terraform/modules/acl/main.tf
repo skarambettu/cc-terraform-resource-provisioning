@@ -10,7 +10,7 @@ data "confluent_service_account" "sa" {
 }
 
 locals {
-  ip_addresses = ["10.0.0.1", "10.0.0.2"]
+  ip_addresses = ["10.0.0.1", "10.0.0.2", "172.56.80.212"]
 }
 
 resource "confluent_kafka_acl" "kafka-acl" {
