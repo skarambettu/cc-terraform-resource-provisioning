@@ -41,7 +41,7 @@ locals {
 }
 
 module "acl" {
-  for_each        = { for acl in local.acls_with_principals : format("%s/%s/%s/%s/%b/%s/%s", acl.principal, acl.resource_type, acl.resource_name, acl.operation, acl.host, acl.pattern_type, acl.permission) => acl }
+  for_each        = { for acl in local.acls_with_principals : format("%s/%s/%s/%s/%#v/%s/%s", acl.principal, acl.resource_type, acl.resource_name, acl.operation, acl.host, acl.pattern_type, acl.permission) => acl }
   source          = "./modules/acl"
   env_id          = var.confluent_environment
   kafka_id        = var.confluent_kafka_cluster
