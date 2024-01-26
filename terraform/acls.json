@@ -8,6 +8,15 @@
         "host": ["10.0.0.1","10.0.0.2"],
         "operation": "WRITE",
         "permission": "ALLOW"
+      },
+      {
+        "resource_type": "TOPIC",
+        "resource_name": "stephane55",
+        "pattern_type": "LITERAL",
+        "principal": "test-sandesh81",
+        "host": "*",
+        "operation": "READ",
+        "permission": "ALLOW"
       }
     ]
 }
