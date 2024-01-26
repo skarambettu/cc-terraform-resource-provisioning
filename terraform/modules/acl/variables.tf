@@ -23,7 +23,7 @@ variable "operation" {
 }
 
 variable "host" {
-  type = list
+  type = string
 }
 
 variable "pattern_type" {
