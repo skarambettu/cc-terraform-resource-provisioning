@@ -14,7 +14,7 @@
         "resource_name": "stephane55",
         "pattern_type": "LITERAL",
         "principal": "test-sandesh81",
-        "host": "*",
+        "host": ["*"],
         "operation": "READ",
         "permission": "ALLOW"
       }
