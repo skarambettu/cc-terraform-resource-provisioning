@@ -1,4 +1,13 @@
 {
     "acls": [
+      {
+        "resource_type": "TOPIC",
+        "resource_name": "stephane55",
+        "pattern_type": "LITERAL",
+        "principal": "test-sandesh81",
+        "host": ["10.0.0.1"],
+        "operation": "WRITE",
+        "permission": "ALLOW"
+      }
     ]
 }

@@ -9,12 +9,8 @@ data "confluent_service_account" "sa" {
   display_name = var.principal
 }
 
-locals {
-  ip_addresses = ["10.0.0.1","172.56.80.212","10.0.0.3","10.0.0.4"]
-}
-
 resource "confluent_kafka_acl" "kafka-acl" {
-  for_each   = toset(local.ip_addresses)
+  for_each   = toset(var.host)
   kafka_cluster {
     id = data.confluent_kafka_cluster.kafka_cluster.id
   }
@@ -22,7 +18,7 @@ resource "confluent_kafka_acl" "kafka-acl" {
   resource_name = var.resource_name
   pattern_type  = var.pattern_type
   principal     = "User:${data.confluent_service_account.sa.id}"
-  host          = each.key
+  host          = each.value
   operation     = var.operation
   permission    = var.permission
   rest_endpoint = data.confluent_kafka_cluster.kafka_cluster.rest_endpoint
