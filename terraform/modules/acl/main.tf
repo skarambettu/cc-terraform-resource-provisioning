@@ -9,12 +9,8 @@ data "confluent_service_account" "sa" {
   display_name = var.principal
 }
 
-locals {
-  ip_addresses = "${var.host}"
-}
-
 resource "confluent_kafka_acl" "kafka-acl" {
-  for_each   = toset(local.ip_addresses)
+  for_each   = toset(var.host)
   kafka_cluster {
     id = data.confluent_kafka_cluster.kafka_cluster.id
   }
