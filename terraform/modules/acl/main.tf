@@ -10,7 +10,7 @@ data "confluent_service_account" "sa" {
 }
 
 locals {
-  ip_addresses = ${var.host}
+  ip_addresses = "${var.host}"
 }
 
 resource "confluent_kafka_acl" "kafka-acl" {
