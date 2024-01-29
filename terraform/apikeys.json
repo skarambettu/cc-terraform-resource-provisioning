@@ -4,6 +4,11 @@
         {
             "principal": "test-sandesh81"
         }
+       ],
+       "schema_registry": [
+        {
+            "principal": "test-sandesh81"
+        }
        ]
     }
 }

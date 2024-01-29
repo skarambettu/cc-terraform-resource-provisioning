@@ -12,6 +12,7 @@ locals {
   acls   = jsondecode(file("./acls.json"))
   apikeys    = jsondecode(file("./apikeys.json"))
   topics = jsondecode(file("./topics.json"))
+  schemas    = jsondecode(file("./schemas.json"))
 }
 
 locals {
@@ -72,4 +73,16 @@ module "topic" {
     api_key    = var.kafka_api_key
     api_secret = var.kafka_api_secret
   }
+}
+
+locals {
+  sr_apikeys_with_principals = [ for apikey in local.apikeys.apikeys.schema_registry : apikey if apikey.principal != "" ]
+}
+
+module "apikey_schema_registry" {
+  for_each = { for apikey in local.sr_apikeys_with_principals : apikey.principal => apikey }
+  source   = "./modules/sr-apikey"
+  env_id   = var.confluent_environment
+  schema_id = var.confluent_schema_registry
+  apikey   = each.value
 }
