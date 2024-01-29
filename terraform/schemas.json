@@ -1,9 +1,4 @@
 {
     "schemas": [
-        {
-            "subject": "sandesh-value",
-            "path": "./pretty_recon_v3.avsc",
-            "format": "AVRO"
-          }
     ]
   }
