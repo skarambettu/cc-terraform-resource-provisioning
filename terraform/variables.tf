@@ -42,3 +42,13 @@ variable "confluent_schema_registry" {
   description = "Confluent cloud schema registry"
   type        = string
 }
+
+variable "schema_registry_api_key" {
+  description = "Schema registry api key"
+  type        = string
+}
+
+variable "schema_registry_api_secret" {
+  description = "Schema registry api secret"
+  type        = string
+}
