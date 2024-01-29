@@ -86,3 +86,19 @@ module "apikey_schema_registry" {
   schema_id = var.confluent_schema_registry
   apikey   = each.value
 }
+
+locals {
+  schemas_with_subject = [ for schema in local.schemas.schemas : schema if schema.subject != "" ]
+}
+
+module "schema" {
+  for_each = { for schema in local.schemas_with_subject : schema.subject => schema }
+  source   = "./modules/schema"
+  env_id   = var.confluent_environment
+  schema_id = var.confluent_schema_registry
+  schema    = each.value
+  admin_sa = {
+    api_key    = var.schema_registry_api_key
+    api_secret = var.schema_registry_api_secret
+  }
+}

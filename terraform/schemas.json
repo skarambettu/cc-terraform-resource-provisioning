@@ -1,4 +1,9 @@
 {
     "schemas": [
+        {
+            "subject": "sandesh-value",
+            "path": "/Users/skarambettu/Desktop/powerex/admin-schema-v2/purchase.avsc",
+            "format": "AVRO"
+          }
     ]
   }

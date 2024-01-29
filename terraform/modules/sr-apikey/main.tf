@@ -11,7 +11,7 @@ data "confluent_service_account" "sa" {
 
 resource "confluent_api_key" "sr-api-key" {
   display_name = "${data.confluent_service_account.sa.display_name}-sr-api-key"
-  description  = "Kafka API Key that is owned by ${data.confluent_service_account.sa.display_name} service account"
+  description  = "Schema Registry API Key that is owned by ${data.confluent_service_account.sa.display_name} service account"
   owner {
     id          = data.confluent_service_account.sa.id
     api_version = data.confluent_service_account.sa.api_version
