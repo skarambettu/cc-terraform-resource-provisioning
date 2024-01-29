@@ -2,7 +2,7 @@
     "schemas": [
         {
             "subject": "sandesh-value",
-            "path": "/Users/skarambettu/Desktop/powerex/admin-schema-v2/purchase.avsc",
+            "path": "/Users/skarambettu/Downloads/devops/test-demo/terraform/pretty_recon_v3.avsc",
             "format": "AVRO"
           }
     ]

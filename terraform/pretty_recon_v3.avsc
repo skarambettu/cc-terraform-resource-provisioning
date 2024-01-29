@@ -1,0 +1,94 @@
+Hi Ramy & Team,
+
+
+
+Here are the items we discussed today 
+
+
+
+1. Reviewed the current Confluent Cloud architecture with AWS Private Link.
+
+2. Reviewed the DR strategy which uses Replicator and the replicator is configured with bidirectional replication and the replicator is deployed in EKS.
+
+3. Reviewed the Confluent Terraform Provider for resource provisioning.
+
+4. Reviewed the monitoring solution which is done using Prometheus and Grafana.
+
+5. Customer tried using Confluent Terraform Provider for Resource Provisioning but later moved out of using the TF and started using the API for Provisioning the confluent resources like Topics, RBAC etc
+
+6. Discussed the integration patterns by going over some of the fully managed connectors offered by confluent.
+
+
+
+Concerns/Limitations - 
+
+1. Limit to the number of User Accounts/Org - They have already reached a limit of 350 user accounts and the limit is 500
+
+2. Limit to the number of RBAC/Org - There is a limit of 1000. But the customer now has the limit increased to 5000.
+
+3. Customer is using Schema Linking for moving schema's. But the schema linking has the requirement to set the source schema registry to "READ-ONLY" and Destination schema registry to "IMPORT" mode. Due to which the application trying to register schema on the source fails.
+
+
+
+Future Goals - 
+
+1. Customer wants to use cluster linking for DR instead of Replicator so they don't have to manage Replicator.
+
+2. Enable OAuth in Confluent Cloud
+
+
+
+Ramy wanted to know if there is a way to build a docker image with different connector plugins for connector provisioning. Here is the example
+
+https://docs.confluent.io/platform/current/installation/docker/development.html#create-a-docker-image-containing-c-hub-connectors
+
+
+
+Service Quotas for confluent Cloud - https://docs.confluent.io/cloud/current/quotas/index.html#service-quotas-for-ccloud
+
+
+
+Multi tenancy and client Quotas on confluent Cloud - https://docs.confluent.io/cloud/current/clusters/client-quotas.html#multi-tenancy-and-client-quotas-on-ccloud
+
+
+
+Replicator and Cross Cluster Failover - https://docs.confluent.io/platform/current/multi-dc-deployments/replicator/replicator-failover.html
+
+
+
+Using OAuth for Confluent Cloud - https://docs.confluent.io/cloud/current/access-management/authenticate/oauth/overview.html
+
+
+
+Next Steps - 
+
+1. Tomorrow we will review the E2E flow from Application connecting to Confluent Cloud and Application Consuming from Confluent Cloud. 
+
+2. Perform the review of the Kafka Streams app.
+
+ansible-vault encrypt hosts.yml
+ansible-playbook --ask-vault-pass -i hosts.yml confluent.platform.all --tags=kafka_connect 
+
+ansible-playbook --vault-password-file=.vault_pass -i hosts.yml confluent.platform.all --tags=kafka_connect
+
+$ ksql-migrations new-project /my/migrations/project/path http://localhost:8088
+$ ksql-migrations --config-file /my/migrations/project/ksql-migrations.properties initialize-metadata
+$ ksql-migrations --config-file /my/migrations/project/ksql-migrations.properties create Add_users
+$ ksql-migrations --config-file /my/migrations/project/ksql-migrations.properties apply --next
+$ ksql-migrations --config-file /my/migrations/project/ksql-migrations.properties info
+$ ksql-migrations --config-file /my/migrations/project/ksql-migrations.properties validate
+
+
+-Thanks
+
+Sandesh
+
+"connection.pool.inactive.timeout.ms""60000",
+"connection.pool.check.interval.timeout.ms": "30000",
+"connection.pool.property.cycle.interval.ms": "30000",
+
+
+Hi Catherine,
+
+You don't have to give license for each and every connector, giving at worker level is enough
+https://docs.confluent.io/platform/current/connect/license.html
