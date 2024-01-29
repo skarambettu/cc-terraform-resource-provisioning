@@ -1,4 +1,9 @@
 {
     "schemas": [
+        {
+            "subject": "stephane-key",
+            "path": "./pretty_recon_v3.avsc",
+            "format": "AVRO"
+          }
     ]
   }
