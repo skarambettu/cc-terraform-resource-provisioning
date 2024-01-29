@@ -37,3 +37,8 @@ variable "kafka_api_secret" {
   description = "Kafka API Secret"
   type        = string
 }
+
+variable "confluent_schema_registry" {
+  description = "Confluent cloud schema registry"
+  type        = string
+}
