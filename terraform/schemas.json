@@ -2,7 +2,7 @@
     "schemas": [
         {
             "subject": "sandesh-value",
-            "path": "/Users/skarambettu/Downloads/devops/test-demo/terraform/pretty_recon_v3.avsc",
+            "path": "./pretty_recon_v3.avsc",
             "format": "AVRO"
           }
     ]
