@@ -5,7 +5,12 @@
           "role": "ResourceOwner",
           "resource": "sandesh-value",
           "principal": "test-sandesh81"
-        }
+        },
+        {
+            "role": "ResourceOwner",
+            "resource": "sandesh1-value",
+            "principal": "test-sandesh81"
+          }
       ]
     }
   }
