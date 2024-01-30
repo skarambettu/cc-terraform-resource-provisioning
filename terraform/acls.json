@@ -152,6 +152,15 @@
         "host": ["172.56.83.123"],
         "operation": "DESCRIBE_CONFIGS",
         "permission": "ALLOW"
+      },
+      {
+        "resource_type": "TOPIC",
+        "resource_name": "stephane64",
+        "pattern_type": "LITERAL",
+        "principal": "test-sandesh81",
+        "host": ["172.56.83.123"],
+        "operation": "DESCRIBE_CONFIGS",
+        "permission": "ALLOW"
       }
     ]
 }
