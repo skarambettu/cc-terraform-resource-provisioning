@@ -7,6 +7,13 @@ provider "confluent" {
   cloud_api_secret = var.confluent_cloud_api_secret
 }
 
+data "confluent_schema_registry_cluster" "schema_cluster_id" {
+  id = var.confluent_schema_registry
+  environment {
+    id = var.confluent_environment
+  }
+}
+
 locals {
   sas    = jsondecode(file("./sas.json"))
   acls   = jsondecode(file("./acls.json"))
