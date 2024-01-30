@@ -1,0 +1,11 @@
+{
+    "rbacs": {
+      "schema_registry": [
+        {
+          "role": "ResourceOwner",
+          "resource": "sandesh-value",
+          "principal": "test-sandesh81"
+        }
+      ]
+    }
+  }

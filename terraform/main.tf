@@ -12,7 +12,7 @@ locals {
   acls   = jsondecode(file("./acls.json"))
   apikeys    = jsondecode(file("./apikeys.json"))
   topics = jsondecode(file("./topics.json"))
-  schemas    = jsondecode(file("./schemas.json"))
+  rbacs  = jsondecode(file("./rbacs.json"))
 }
 
 locals {
@@ -76,29 +76,13 @@ module "topic" {
 }
 
 locals {
-  sr_apikeys_with_principals = [ for apikey in local.apikeys.apikeys.schema_registry : apikey if apikey.principal != "" ]
+  rbacs_with_schema_registry = [ for rbac in local.rbacs.rbacs.schema_registry : rbac if rbac.resource != "" ]
 }
 
-module "apikey_schema_registry" {
-  for_each = { for apikey in local.sr_apikeys_with_principals : apikey.principal => apikey }
-  source   = "./modules/sr-apikey"
-  env_id   = var.confluent_environment
-  schema_id = var.confluent_schema_registry
-  apikey   = each.value
-}
-
-locals {
-  schemas_with_subject = [ for schema in local.schemas.schemas : schema if schema.subject != "" ]
-}
-
-module "schema" {
-  for_each = { for schema in local.schemas_with_subject : schema.subject => schema }
-  source   = "./modules/schema"
-  env_id   = var.confluent_environment
-  schema_id = var.confluent_schema_registry
-  schema    = each.value
-  admin_sa = {
-    api_key    = var.schema_registry_api_key
-    api_secret = var.schema_registry_api_secret
-  }
+module "rbac_schema_registry" {
+  for_each             = { for rbac in local.rbacs_with_schema_registry : format("%s/%s/%s", rbac.resource, rbac.role, rbac.principal) => rbac }
+  source               = "./modules/rbac"
+  crn                  = "${data.confluent_schema_registry_cluster.schema_cluster_id.resource_name}/subject=${each.value.resource}"
+  role                 = each.value.role
+  principal            = each.value.principal
 }
