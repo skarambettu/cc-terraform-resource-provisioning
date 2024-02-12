@@ -39,8 +39,8 @@ stages:
         command: 'plan'
         commandOptions: '--out=tfplan'
       env:
-        TF_VAR_CONFLUENT_CLOUD_API_KEY: $(cloud_api_key)
-        TF_VAR_CONFLUENT_CLOUD_API_SECRET: $(cloud_api_secret)
+        TF_VAR_CONFLUENT_CLOUD_API_KEY: '6TL35LZL7RWNHI34'
+        TF_VAR_CONFLUENT_CLOUD_API_SECRET: 'eWcXorXAF17rSsC2XN6zNhDcy/7H534Pt/bwsJTAsW7rznTIDYkNm2PwpfAcmIFm'
 
     - task: CopyFiles@2
       displayName: 'Copy terraform plan'
