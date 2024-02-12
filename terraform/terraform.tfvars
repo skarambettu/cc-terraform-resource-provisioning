@@ -3,3 +3,7 @@ project_env="dev"
 confluent_environment="env-xrz8qx"
 confluent_kafka_cluster="lkc-757knp"
 confluent_schema_registry="lsrc-1w8n0v"
+confluent_cloud_api_key=6TL35LZL7RWNHI34
+confluent_cloud_api_secret=eWcXorXAF17rSsC2XN6zNhDcy/7H534Pt/bwsJTAsW7rznTIDYkNm2PwpfAcmIFm
+kafka_api_key=DPK3XPDOMKPNRAOZ
+kafka_api_secret=XrzGFC5zj5j85mmPv9uzjs/wnGmI/w3w6X/DzATVa+pl8GIEe+ciCtSNOMeW9L1U
