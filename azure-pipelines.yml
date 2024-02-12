@@ -10,7 +10,7 @@ pool:
   vmImage: ubuntu-latest
   
 variables:
-- group: sandesh
+- group: Sandesh
 
 steps:
 - script: echo Hello, world!
