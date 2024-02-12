@@ -28,6 +28,14 @@ steps:
     backendAzureRmStorageAccountName: 'sandeshblobstore'
     backendAzureRmContainerName: 'sandesh-test'
     backendAzureRmKey: 'test.tfstate'
+    
+- task: TerraformTaskV4@4
+  inputs:
+    provider: 'azurerm'
+    command: 'plan'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
+    commandOptions: '--out=tfplan'
+    environmentServiceNameAzureRM: 'COPS(4aef46e4-5a41-4867-9f2e-fa4a3b9dd2d2)'
 
 - script: |
     echo Add other tasks to build, test, and deploy your project.
