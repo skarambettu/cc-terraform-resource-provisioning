@@ -63,7 +63,7 @@ stages:
     displayName: DEPLOY
     environment: $(environment)
     pool:
-      name: 'ConfluentCloudAgentPool'
+      vmImage: ubuntu-latest
     strategy:
       runOnce:
         deploy:
