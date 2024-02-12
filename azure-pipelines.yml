@@ -1,94 +1,38 @@
-trigger:
-- none
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
 
-variables:
-  environment: 'Confluent Cloud'
+trigger:
+- main
 
 pool:
   vmImage: ubuntu-latest
 
-stages:
-- stage: PLAN
-  jobs:
-  - job: PLAN
-    displayName: PLAN
-    steps:
-    - task: TerraformInstaller@1
-      displayName: Install Terraform
-      inputs:
-        terraformVersion: '1.0.0'
-    - task: TerraformTaskV4@4
-      inputs:
-        provider: 'azurerm'
-        command: 'init -backend-config=access-key=l4FND4Oxzk4hI3AcQQO2MO2tcRXSbfJa4fmmshf81tSUFgM8RMKtpO8PW+Gc3gctjasuNQcFprzc+AStutDb1g=='
-        backendServiceArm: 'COPS (4aef46e4-5a41-4867-9f2e-fa4a3b9dd2d2)'
-        backendAzureRmResourceGroupName: 'sandesh-group1'
-        backendAzureRmStorageAccountName: 'sandeshblobstore'
-        backendAzureRmContainerName: 'sandesh-test'
-        backendAzureRmKey: 'tfstate/prd/terraform.tfstate'
+steps:
+- script: echo Hello, world!
+  displayName: 'Run a one-line script'
 
-    - task: TerraformTaskV4@4
-      displayName: 'terraform validate'
-      inputs:
-        provider: 'azurerm'
-        command: 'validate'
+- task: TerraformInstaller@1
+  inputs:
+    terraformVersion: 'latest'
 
-    - task: TerraformTaskV4@4
-      displayName: 'terraform plan'
-      inputs:
-        provider: 'azurerm'
-        command: 'plan'
-        commandOptions: '--out=tfplan'
-        environmentServiceNameAzureRM: 'COPS (4aef46e4-5a41-4867-9f2e-fa4a3b9dd2d2)'
-      env:
-        TF_VAR_CONFLUENT_CLOUD_API_KEY: '6TL35LZL7RWNHI34'
-        TF_VAR_CONFLUENT_CLOUD_API_SECRET: 'eWcXorXAF17rSsC2XN6zNhDcy/7H534Pt/bwsJTAsW7rznTIDYkNm2PwpfAcmIFm'
-
-    - task: CopyFiles@2
-      displayName: 'Copy terraform plan'
-      inputs:
-        SourceFolder: '$(System.DefaultWorkingDirectory)'
-        TargetFolder: '$(Build.ArtifactStagingDirectory)'
-
-    - task: PublishBuildArtifacts@1
-      displayName: 'Publish terraform plan'
-      inputs:
-        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-        ArtifactName: 'tfplan'
-        publishLocation: 'Container'
-
-- stage: DEPLOY
-  condition: succeeded()
-  dependsOn: PLAN
-  jobs:
-  - deployment:
-    displayName: DEPLOY
-    environment: $(environment)
-    pool:
-      vmImage: ubuntu-latest
-    strategy:
-      runOnce:
-        deploy:
-          steps:
-          - task: TerraformTaskV4@4
-            inputs:
-              provider: 'azurerm'
-              command: 'init'
-              workingDirectory: '$(Agent.BuildDirectory)/terraform/'
-              backendServiceArm: 'COPS (4aef46e4-5a41-4867-9f2e-fa4a3b9dd2d2)'
-              backendAzureRmResourceGroupName: 'sandesh-group1'
-              backendAzureRmStorageAccountName: 'sandeshblobstore'
-              backendAzureRmContainerName: 'sandesh-test'
-              backendAzureRmKey: 'tfstate/prd/terraform.tfstate'
-
-          - task: TerraformTaskV4@4
-            displayName: 'terraform apply'
-            inputs:
-              provider: 'azurerm'
-              command: 'apply'
-              commandOptions: 'tfplan'
-              workingDirectory: '$(Agent.BuildDirectory)/terraform/'
-              environmentServiceNameAzureRM: 'COPS (4aef46e4-5a41-4867-9f2e-fa4a3b9dd2d2)'
-            env:
-              TF_VAR_CONFLUENT_CLOUD_API_KEY: '6TL35LZL7RWNHI34'
-              TF_VAR_CONFLUENT_CLOUD_API_SECRET: 'eWcXorXAF17rSsC2XN6zNhDcy/7H534Pt/bwsJTAsW7rznTIDYkNm2PwpfAcmIFm'
+- task: TerraformTaskV4@4
+  inputs:
+    provider: 'azurerm'
+    command: 'init'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
+    commandOptions: '-backend-config=access_key=l4FND4Oxzk4hI3AcQQO2MO2tcRXSbfJa4fmmshf81tSUFgM8RMKtpO8PW+Gc3gctjasuNQcFprzc+AStutDb1g=='
+    backendServiceArm: 'COPS(4aef46e4-5a41-4867-9f2e-fa4a3b9dd2d2)'
+    backendAzureRmResourceGroupName: 'sandesh-group1'
+    backendAzureRmStorageAccountName: 'sandeshblobstore'
+    backendAzureRmContainerName: 'sandesh-test'
+    backendAzureRmKey: 'test2.tfstate'
+    
+- task: TerraformTaskV4@4
+  inputs:
+    provider: 'azurerm'
+    command: 'plan'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
+    commandOptions: '--out=tfplan'
+    environmentServiceNameAzureRM: 'COPS(4aef46e4-5a41-4867-9f2e-fa4a3b9dd2d2)'
