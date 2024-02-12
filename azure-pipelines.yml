@@ -1,0 +1,86 @@
+trigger:
+- none
+
+variables:
+  environment: 'Confluent Cloud'
+
+pool:
+  name: 'ConfluentCloudAgentPool'
+
+stages:
+- stage: PLAN
+  jobs:
+  - job: PLAN
+    displayName: PLAN
+    steps:
+    - task: TerraformTaskV4@4
+      inputs:
+        provider: 'azurerm'
+        command: 'init'
+        backendAzureRmResourceGroupName: 'sandesh-group1'
+        backendAzureRmStorageAccountName: 'sandeshblobstore'
+        backendAzureRmContainerName: 'sandesh-test'
+        backendAzureRmKey: 'tfstate/prd/terraform.tfstate'
+
+    - task: TerraformTaskV4@4
+      displayName: 'terraform validate'
+      inputs:
+        provider: 'azurerm'
+        command: 'validate'
+
+    - task: TerraformTaskV4@4
+      displayName: 'terraform plan'
+      inputs:
+        provider: 'azurerm'
+        command: 'plan'
+        commandOptions: '--out=tfplan'
+      env:
+        TF_VAR_CONFLUENT_CLOUD_API_KEY: $(cloud_api_key)
+        TF_VAR_CONFLUENT_CLOUD_API_SECRET: $(cloud_api_secret)
+
+    - task: CopyFiles@2
+      displayName: 'Copy terraform plan'
+      inputs:
+        SourceFolder: '$(System.DefaultWorkingDirectory)'
+        TargetFolder: '$(Build.ArtifactStagingDirectory)'
+
+    - task: PublishBuildArtifacts@1
+      displayName: 'Publish terraform plan'
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+        ArtifactName: 'tfplan'
+        publishLocation: 'Container'
+
+- stage: DEPLOY
+  condition: succeeded()
+  dependsOn: PLAN
+  jobs:
+  - deployment:
+    displayName: DEPLOY
+    environment: $(environment)
+    pool:
+      name: 'ConfluentCloudAgentPool'
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - task: TerraformTaskV4@4
+            inputs:
+              provider: 'azurerm'
+              command: 'init'
+              workingDirectory: '$(Agent.BuildDirectory)/terraform/'
+              backendAzureRmResourceGroupName: 'sandesh-group1'
+              backendAzureRmStorageAccountName: 'sandeshblobstore'
+              backendAzureRmContainerName: 'sandesh-test'
+              backendAzureRmKey: 'tfstate/prd/terraform.tfstate'
+
+          - task: TerraformTaskV4@4
+            displayName: 'terraform apply'
+            inputs:
+              provider: 'azurerm'
+              command: 'apply'
+              commandOptions: 'tfplan'
+              workingDirectory: '$(Agent.BuildDirectory)/terraform/'
+            env:
+              TF_VAR_CONFLUENT_CLOUD_API_KEY: '6TL35LZL7RWNHI34'
+              TF_VAR_CONFLUENT_CLOUD_API_SECRET: 'eWcXorXAF17rSsC2XN6zNhDcy/7H534Pt/bwsJTAsW7rznTIDYkNm2PwpfAcmIFm'
