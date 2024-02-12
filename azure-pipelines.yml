@@ -13,6 +13,10 @@ stages:
   - job: PLAN
     displayName: PLAN
     steps:
+    - name: setup Terraform
+      uses: hashicorp/setup-terraform@v2
+      with:
+        terraform_wrapper: false
     - task: TerraformTaskV4@4
       inputs:
         provider: 'azurerm'
