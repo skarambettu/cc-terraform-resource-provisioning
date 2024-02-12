@@ -8,6 +8,9 @@ trigger:
 
 pool:
   vmImage: ubuntu-latest
+  
+variables:
+- group: sandesh
 
 steps:
 - script: echo Hello, world!
@@ -36,6 +39,11 @@ steps:
     workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
     commandOptions: '--out=tfplan'
     environmentServiceNameAzureRM: 'COPS(4aef46e4-5a41-4867-9f2e-fa4a3b9dd2d2)'
+  env:
+    TF_VAR_confluent_api_key: $(confluent-api-key)
+    TF_VAR_confluent_api_secret: $(confluent-api-secret)
+    TF_VAR_kafka_api_key: $(kafka-api-key)
+    TF_VAR_kafka_api_secret: $(kafka-api-secret)
 
 - task: TerraformTaskV4@4
   inputs:
@@ -43,4 +51,9 @@ steps:
     command: 'apply'
     workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
     environmentServiceNameAzureRM: 'COPS(4aef46e4-5a41-4867-9f2e-fa4a3b9dd2d2)'
+  env:
+    TF_VAR_confluent_api_key: $(confluent-api-key)
+    TF_VAR_confluent_api_secret: $(confluent-api-secret)
+    TF_VAR_kafka_api_key: $(kafka-api-key)
+    TF_VAR_kafka_api_secret: $(kafka-api-secret)
 
