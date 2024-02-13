@@ -9,6 +9,9 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 
+variables:
+- group: Sandesh
+
 steps:
 - task: TerraformInstaller@1
   inputs:
@@ -33,6 +36,11 @@ steps:
     workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
     commandOptions: '--out=tfplan'
     environmentServiceNameAzureRM: 'COPS(4aef46e4-5a41-4867-9f2e-fa4a3b9dd2d2)'
+  env:
+    TF_VAR_confluent_cloud_api_key: $(confluent-cloud-api-key)
+    TF_VAR_confluent_cloud_api_secret: $(confluent-cloud-api-secret)
+    TF_VAR_kafka_api_key: $(kafka-api-key)
+    TF_VAR_kafka_api_secret: $(kafka-api-secret)
 
 - task: TerraformTaskV4@4
   inputs:
@@ -40,3 +48,8 @@ steps:
     command: 'apply'
     workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
     environmentServiceNameAzureRM: 'COPS(4aef46e4-5a41-4867-9f2e-fa4a3b9dd2d2)'
+  env:
+    TF_VAR_confluent_cloud_api_key: $(confluent-cloud-api-key)
+    TF_VAR_confluent_cloud_api_secret: $(confluent-cloud-api-secret)
+    TF_VAR_kafka_api_key: $(kafka-api-key)
+    TF_VAR_kafka_api_secret: $(kafka-api-secret)
