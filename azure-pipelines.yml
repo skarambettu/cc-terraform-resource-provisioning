@@ -10,7 +10,7 @@ pool:
   vmImage: ubuntu-latest
 
 variables:
-- group: Sandesh
+  - group: Sandesh
 
 steps:
 - task: TerraformInstaller@1
