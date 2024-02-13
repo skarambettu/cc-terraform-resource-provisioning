@@ -34,22 +34,13 @@ steps:
     provider: 'azurerm'
     command: 'plan'
     workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
-    commandOptions: '--out=tfplan'
+    commandOptions: '-var kafka_api_key=$(kafka-api-key) -var kafka_api_secret=$(kafka-api-secret) -var confluent_cloud_api_key=$(confluent-cloud-api-key) -var confluent_cloud_api_secret=$(confluent-cloud-api-secret) --out=tfplan'
     environmentServiceNameAzureRM: 'COPS(4aef46e4-5a41-4867-9f2e-fa4a3b9dd2d2)'
-  env:
-    TF_VAR_confluent_cloud_api_key: $(confluent-cloud-api-key)
-    TF_VAR_confluent_cloud_api_secret: $(confluent-cloud-api-secret)
-    TF_VAR_kafka_api_key: $(kafka-api-key)
-    TF_VAR_kafka_api_secret: $(kafka-api-secret)
 
 - task: TerraformTaskV4@4
   inputs:
     provider: 'azurerm'
     command: 'apply'
     workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
+    commandOptions: '-var kafka_api_key=$(kafka-api-key) -var kafka_api_secret=$(kafka-api-secret) -var confluent_cloud_api_key=$(confluent-cloud-api-key) -var confluent_cloud_api_secret=$(confluent-cloud-api-secret)'
     environmentServiceNameAzureRM: 'COPS(4aef46e4-5a41-4867-9f2e-fa4a3b9dd2d2)'
-  env:
-    TF_VAR_confluent_cloud_api_key: $(confluent-cloud-api-key)
-    TF_VAR_confluent_cloud_api_secret: $(confluent-cloud-api-secret)
-    TF_VAR_kafka_api_key: $(kafka-api-key)
-    TF_VAR_kafka_api_secret: $(kafka-api-secret)
