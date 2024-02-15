@@ -206,6 +206,87 @@
         "host": ["172.56.83.123"],
         "operation": "READ",
         "permission": "ALLOW"
+      },
+      {
+        "resource_type": "CLUSTER",
+        "resource_name": "kafka-cluster",
+        "pattern_type": "LITERAL",
+        "principal": "test-sandesh81",
+        "host": ["172.56.83.123"],
+        "operation": "DESCRIBE",
+        "permission": "ALLOW"
+      },
+      {
+        "resource_type": "TOPIC",
+        "resource_name": "sample-data",
+        "pattern_type": "LITERAL",
+        "principal": "test-sandesh81",
+        "host": ["172.56.83.123"],
+        "operation": "READ",
+        "permission": "ALLOW"
+      },
+      {
+        "resource_type": "TOPIC",
+        "resource_name": "dlq-lcc",
+        "pattern_type": "PREFIXED",
+        "principal": "test-sandesh81",
+        "host": ["172.56.83.123"],
+        "operation": "CREATE",
+        "permission": "ALLOW"
+      },
+      {
+        "resource_type": "TOPIC",
+        "resource_name": "dlq-lcc",
+        "pattern_type": "PREFIXED",
+        "principal": "test-sandesh81",
+        "host": ["172.56.83.123"],
+        "operation": "WRITE",
+        "permission": "ALLOW"
+      },
+      {
+        "resource_type": "TOPIC",
+        "resource_name": "success-lcc",
+        "pattern_type": "PREFIXED",
+        "principal": "test-sandesh81",
+        "host": ["172.56.83.123"],
+        "operation": "CREATE",
+        "permission": "ALLOW"
+      },
+      {
+        "resource_type": "TOPIC",
+        "resource_name": "success-lcc",
+        "pattern_type": "PREFIXED",
+        "principal": "test-sandesh81",
+        "host": ["172.56.83.123"],
+        "operation": "WRITE",
+        "permission": "ALLOW"
+      },
+      {
+        "resource_type": "TOPIC",
+        "resource_name": "error-lcc",
+        "pattern_type": "PREFIXED",
+        "principal": "test-sandesh81",
+        "host": ["172.56.83.123"],
+        "operation": "CREATE",
+        "permission": "ALLOW"
+      },
+      {
+        "resource_type": "TOPIC",
+        "resource_name": "error-lcc",
+        "pattern_type": "PREFIXED",
+        "principal": "test-sandesh81",
+        "host": ["172.56.83.123"],
+        "operation": "WRITE",
+        "permission": "ALLOW"
+      },
+      {
+        "resource_type": "GROUP",
+        "resource_name": "connect-lcc",
+        "pattern_type": "PREFIXED",
+        "principal": "test-sandesh81",
+        "host": ["172.56.83.123"],
+        "operation": "READ",
+        "permission": "ALLOW"
       }
     ]
 }
