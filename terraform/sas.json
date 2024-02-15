@@ -1,4 +1,7 @@
 {
     "sas": [
+      {
+      "name": "snowflake-sa"
+      }
     ]
   }
