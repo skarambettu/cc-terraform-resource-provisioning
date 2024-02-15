@@ -287,6 +287,15 @@
         "host": ["172.56.83.123"],
         "operation": "READ",
         "permission": "ALLOW"
+      },
+      {
+        "resource_type": "TOPIC",
+        "resource_name": "test_data",
+        "pattern_type": "LITERAL",
+        "principal": "test-sandesh81",
+        "host": ["172.56.83.123"],
+        "operation": "READ",
+        "permission": "ALLOW"
       }
     ]
 }
