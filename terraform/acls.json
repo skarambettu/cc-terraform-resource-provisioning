@@ -377,6 +377,87 @@
         "host": ["172.56.82.111"],
         "operation": "READ",
         "permission": "ALLOW"
+      },
+      {
+        "resource_type": "CLUSTER",
+        "resource_name": "kafka-cluster",
+        "pattern_type": "LITERAL",
+        "principal": "test-sandesh81",
+        "host": ["*"],
+        "operation": "DESCRIBE",
+        "permission": "ALLOW"
+      },
+      {
+        "resource_type": "TOPIC",
+        "resource_name": "test_data",
+        "pattern_type": "LITERAL",
+        "principal": "test-sandesh81",
+        "host": ["*"],
+        "operation": "READ",
+        "permission": "ALLOW"
+      },
+      {
+        "resource_type": "TOPIC",
+        "resource_name": "dlq-lcc",
+        "pattern_type": "PREFIXED",
+        "principal": "test-sandesh81",
+        "host": ["*"],
+        "operation": "CREATE",
+        "permission": "ALLOW"
+      },
+      {
+        "resource_type": "TOPIC",
+        "resource_name": "dlq-lcc",
+        "pattern_type": "PREFIXED",
+        "principal": "test-sandesh81",
+        "host": ["*"],
+        "operation": "WRITE",
+        "permission": "ALLOW"
+      },
+      {
+        "resource_type": "TOPIC",
+        "resource_name": "success-lcc",
+        "pattern_type": "PREFIXED",
+        "principal": "test-sandesh81",
+        "host": ["*"],
+        "operation": "CREATE",
+        "permission": "ALLOW"
+      },
+      {
+        "resource_type": "TOPIC",
+        "resource_name": "success-lcc",
+        "pattern_type": "PREFIXED",
+        "principal": "test-sandesh81",
+        "host": ["*"],
+        "operation": "WRITE",
+        "permission": "ALLOW"
+      },
+      {
+        "resource_type": "TOPIC",
+        "resource_name": "error-lcc",
+        "pattern_type": "PREFIXED",
+        "principal": "test-sandesh81",
+        "host": ["*"],
+        "operation": "CREATE",
+        "permission": "ALLOW"
+      },
+      {
+        "resource_type": "TOPIC",
+        "resource_name": "error-lcc",
+        "pattern_type": "PREFIXED",
+        "principal": "test-sandesh81",
+        "host": ["*"],
+        "operation": "WRITE",
+        "permission": "ALLOW"
+      },
+      {
+        "resource_type": "GROUP",
+        "resource_name": "connect-lcc",
+        "pattern_type": "PREFIXED",
+        "principal": "test-sandesh81",
+        "host": ["*"],
+        "operation": "READ",
+        "permission": "ALLOW"
       }
     ]
 }
