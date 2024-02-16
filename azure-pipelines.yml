@@ -27,7 +27,7 @@ steps:
     backendAzureRmResourceGroupName: 'sandesh-group1'
     backendAzureRmStorageAccountName: 'sandeshblobstore'
     backendAzureRmContainerName: 'sandesh-test'
-    backendAzureRmKey: 'test4.tfstate'
+    backendAzureRmKey: 'test5.tfstate'
     
 - task: TerraformTaskV4@4
   inputs:
