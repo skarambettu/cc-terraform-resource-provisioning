@@ -1,5 +1,5 @@
 project="projectA"
 project_env="dev"
 confluent_environment="env-xrz8qx"
-confluent_kafka_cluster="lkc-pj13oo"
+confluent_kafka_cluster="lkc-w2xvww"
 confluent_schema_registry="lsrc-1w8n0v"
