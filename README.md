@@ -9,8 +9,8 @@ This repo consists of terraform modules for confluent resource provisioning. The
        }
     ]
   }
-2. Topic creation - modify topics.json
 
+2. Topic creation - modify topics.json
 {
     "topics": [
       {
