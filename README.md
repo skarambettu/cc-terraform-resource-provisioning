@@ -62,3 +62,14 @@ This repo consists of terraform modules for confluent resource provisioning. The
       }
    ]
 }
+
+5. API Key creation - modify apikeys.json
+{
+    "apikeys": {
+       "kafka": [
+        {
+            "principal": "test-sandesh81"
+        }
+       ]
+    }
+}
