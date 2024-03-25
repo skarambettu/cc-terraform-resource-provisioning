@@ -1,5 +1,7 @@
 This repo consists of terraform modules for confluent resource provisioning. The resources include (topic, acl, rbac, service account, apikey) creation. 
 
+Resource provisioning using terraform can be acheived as below - 
+
 1. Service account creation - modify sas.json file 
 
 {
