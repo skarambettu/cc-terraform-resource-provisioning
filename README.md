@@ -1,4 +1,4 @@
-This repo consists of terraform modules for confluent resource provisioning. The resources include (topic, acl, rbac, service account, apikey) creation. 
+This repo consists of terraform modules for confluent resource provisioning. The resources include (topic, acl, rbac, service account, apikey) creation. This repo also have the CI/CD pipelines for resource provisioning using Github actions and Azure devops pipeline.
 
 Resource provisioning using terraform can be acheived as below - 
 
