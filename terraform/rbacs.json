@@ -11,6 +11,20 @@
             "resource": "sandesh1-value",
             "principal": "test-sandesh81"
           }
+      ],
+      "kafka": [
+        {
+          "role": "DeveloperWrite",
+          "resource": "stephane100",
+          "principal": "test-sandesh81"
+        }
+      ],
+      "consumer_group": [
+        {
+          "role": "DeveloperRead",
+          "resource": "sandesh-group",
+          "principal": "test-sandesh81"
+        }
       ]
     }
   }
