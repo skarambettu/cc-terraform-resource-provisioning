@@ -14,6 +14,13 @@ data "confluent_schema_registry_cluster" "schema_cluster_id" {
   }
 }
 
+data "confluent_kafka_cluster" "kafka_cluster" {
+  id = var.confluent_kafka_cluster
+  environment {
+    id = var.confluent_environment
+  }
+}
+
 locals {
   sas    = jsondecode(file("./sas.json"))
   acls   = jsondecode(file("./acls.json"))
@@ -90,6 +97,30 @@ module "rbac_schema_registry" {
   for_each             = { for rbac in local.rbacs_with_schema_registry : format("%s/%s/%s", rbac.resource, rbac.role, rbac.principal) => rbac }
   source               = "./modules/rbac"
   crn                  = "${data.confluent_schema_registry_cluster.schema_cluster_id.resource_name}/subject=${each.value.resource}"
+  role                 = each.value.role
+  principal            = each.value.principal
+}
+
+locals {
+  rbacs_for_kafka = [ for rbac in local.rbacs.rbacs.kafka : rbac if rbac.resource != "" ]
+}
+
+module "rbac_kafka" {
+  for_each             = { for rbac in local.rbacs_for_kafka : format("%s/%s/%s", rbac.resource, rbac.role, rbac.principal) => rbac }
+  source               = "./modules/rbac"
+  crn                  = "${data.confluent_kafka_cluster.kafka_cluster.rbac_crn}/kafka=${data.confluent_kafka_cluster.kafka_cluster.id}/topic=${each.value.resource}"
+  role                 = each.value.role
+  principal            = each.value.principal
+}
+
+locals {
+  rbacs_for_group = [ for rbac in local.rbacs.rbacs.consumer_group : rbac if rbac.resource != "" ]
+}
+
+module "rbac_consumer_group" {
+  for_each             = { for rbac in local.rbacs_for_group : format("%s/%s/%s", rbac.resource, rbac.role, rbac.principal) => rbac }
+  source               = "./modules/rbac"
+  crn                  = "${data.confluent_kafka_cluster.kafka_cluster.rbac_crn}/kafka=${data.confluent_kafka_cluster.kafka_cluster.id}/group=${each.value.resource}"
   role                 = each.value.role
   principal            = each.value.principal
 }
