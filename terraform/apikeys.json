@@ -1,9 +1,6 @@
 {
     "apikeys": {
        "kafka": [
-        {
-            "principal": "test-sandesh81"
-        }
        ]
     }
 }
