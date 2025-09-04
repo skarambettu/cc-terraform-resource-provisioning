@@ -48,6 +48,10 @@ jobs:
           confluent_cloud_api_secret = "${{ secrets.CONFLUENT_CLOUD_API_SECRET }}"
           kafka_api_key = "${{ secrets.KAFKA_API_KEY }}"
           kafka_api_secret = "${{ secrets.KAFKA_API_SECRET }}"
+          sr_api_key = "${{ secrets.SR_API_KEY }}"
+          sr_api_secret = "${{ secrets.SR_API_SECRET }}"
+          project_id = "${{ secrets.PROJECT_ID }}"
+          region = "${{ secrets.REGION }}"
           EOF
           cat qut.terraform.tfvars
       - name: Terraform Plan
