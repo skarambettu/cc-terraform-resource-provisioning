@@ -32,3 +32,13 @@ variable "confluent_schema_registry" {
   description = "Confluent cloud schema registry"
   type        = string
 }
+
+variable "project_id" {
+  description = "GCP Project Id"
+  type        = string
+}
+
+variable "region" {
+  description = "GCP Region"
+  type.       = string
+}
