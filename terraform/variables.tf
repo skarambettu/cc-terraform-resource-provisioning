@@ -42,3 +42,13 @@ variable "region" {
   description = "GCP Region"
   type       = string
 }
+
+variable "sr_api_key" {
+  description = "Schema Registry API Key"
+  type        = string
+}
+
+variable "sr_api_secret" {
+  description = "Schema Registry API Secret"
+  type        = string
+}
