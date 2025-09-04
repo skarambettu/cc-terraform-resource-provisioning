@@ -1,5 +1,8 @@
 terraform {
-  backend "azurerm" {}
+  backend "gcs" {
+    bucket  = "sandesh-bucket"
+    prefix  = "terraform/state5"
+  }
 }
 
 provider "confluent" {
@@ -12,6 +15,11 @@ data "confluent_schema_registry_cluster" "schema_cluster_id" {
   environment {
     id = var.confluent_environment
   }
+}
+
+provider "google" {
+  project = var.project_id
+  region  = var.region
 }
 
 data "confluent_kafka_cluster" "kafka_cluster" {
