@@ -6,6 +6,11 @@ on:
   push:
     branches: ["main"]
 
+# Add permissions for OIDC token
+permissions:
+  contents: 'read'
+  id-token: 'write'
+
 jobs:
   terraform-plan:
     runs-on: ubuntu-latest
@@ -13,22 +18,17 @@ jobs:
       name: dev
     env:
       TF_VARS_FILE: qut.terraform.tfvars
-      # Set an environment variable for the path to the credentials file
-      GCP_CREDS_PATH: ${{ github.workspace }}/gcp_credentials.json
 
     steps:
       - name: Checkout
         uses: actions/checkout@v1
 
-      - name: 'Create GCP Credentials File'
-        id: 'gcp_credentials'
-        run: |
-          echo "${{ secrets.GCP_SA_KEY }}" > ${{ env.GCP_CREDS_PATH }}
-
-      # Now, set the GOOGLE_APPLICATION_CREDENTIALS environment variable
-      # for subsequent steps in the job.
-      - name: 'Set GOOGLE_APPLICATION_CREDENTIALS'
-        run: echo "GOOGLE_APPLICATION_CREDENTIALS=${{ env.GCP_CREDS_PATH }}" >> $GITHUB_ENV
+      - name: 'Authenticate to Google Cloud'
+        id: 'auth'
+        uses: 'google-github-actions/auth@v2'
+        with:
+          workload_identity_provider: 'projects/391245638390/locations/global/workloadIdentityPools/sandesh-pool/providers/github'
+          service_account: 'sandesh-sa@solutionsarchitect-01.iam.gserviceaccount.com'
 
       # Your Terraform steps will now automatically use the credentials
       - name: setup Terraform
