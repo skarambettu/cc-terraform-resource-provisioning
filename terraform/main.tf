@@ -1,8 +1,5 @@
 terraform {
-  backend "gcs" {
-    bucket  = "sandesh-bucket"
-    prefix  = "terraform/state5"
-  }
+  backend "gcs" {}
 }
 
 provider "confluent" {
