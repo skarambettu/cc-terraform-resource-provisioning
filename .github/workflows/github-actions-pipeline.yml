@@ -37,7 +37,7 @@ jobs:
           terraform_wrapper: false
       - name: Terraform init
         id: init
-        run: terraform init -backend-config="backend-${{ secret.ENV }}.tfvars"
+        run: terraform init -backend-config="backend-${{ secrets.ENV }}.tfvars"
         working-directory: ./terraform
       - name: Setup Terraform variables
         working-directory: ./terraform
