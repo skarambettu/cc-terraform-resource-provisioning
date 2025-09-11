@@ -4,7 +4,10 @@ name: CI/CD with Terraform
 
 on:
   push:
-    branches: ["main"]
+    branches:
+      - main
+      - develop
+      - release/*
 
 # Add permissions for OIDC token
 permissions:
@@ -14,8 +17,7 @@ permissions:
 jobs:
   terraform-plan:
     runs-on: ubuntu-latest
-    environment:
-      name: dev
+    environment: ${{ github.ref == 'refs/heads/main' && 'production' || github.ref == 'refs/heads/develop' && 'development' || 'staging' }}
     env:
       TF_VARS_FILE: qut.terraform.tfvars
 
@@ -35,10 +37,22 @@ jobs:
         uses: hashicorp/setup-terraform@v2
         with:
           terraform_wrapper: false
-      - name: Terraform init
-        id: init
-        run: terraform init -backend-config="backend-${{ secrets.ENV }}.tfvars"
+
+      - name: Terraform Init - Dev
+        if: github.ref == 'refs/heads/develop'
+        run: terraform init -backend-config="backend-dev.tfvars"
         working-directory: ./terraform
+
+      - name: Terraform Init - Staging
+        if: startsWith(github.ref, 'refs/heads/release/')
+        run: terraform init -backend-config="backend-staging.tfvars"
+        working-directory: ./terraform
+
+      - name: Terraform Init - Prod
+        if: github.ref == 'refs/heads/main'
+        run: terraform init -backend-config="backend-prod.tfvars"
+        working-directory: ./terraform
+        
       - name: Setup Terraform variables
         working-directory: ./terraform
         id: vars
