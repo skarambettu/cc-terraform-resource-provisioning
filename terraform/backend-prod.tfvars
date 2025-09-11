@@ -1,2 +1,2 @@
 bucket  = "sandesh-bucket"
-prefix  = "terraform/state5"
+prefix  = "terraform/state8"
